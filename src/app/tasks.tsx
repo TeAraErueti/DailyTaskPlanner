@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -7,13 +7,16 @@ import {
   View,
   Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// Key used to store tasks on the device
+const STORAGE_KEY = "daily_tasks";
 
 /**
  * Tasks screen where users can add, view and delete
  * daily tasks.
  */
 export default function TaskScreen() {
-
   // Stores the task currently being typed by the user
   const [task, setTask] = useState("");
 
@@ -24,11 +27,54 @@ export default function TaskScreen() {
   const totalTasks = tasks.length;
 
   /**
+   * Loads saved tasks from local storage
+   * when the application starts.
+   */
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  /**
+   * Saves the task list whenever it changes.
+   */
+  useEffect(() => {
+    saveTasks();
+  }, [tasks]);
+
+  /**
+   * Saves tasks to AsyncStorage.
+   */
+  async function saveTasks() {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      console.log("Saved tasks:", tasks);
+    } catch (error) {
+      console.log("Error saving tasks:", error);
+    }
+  }
+
+  /**
+   * Loads tasks from AsyncStorage.
+   */
+  async function loadTasks() {
+    try {
+      const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
+
+      console.log("Loaded:", storedTasks);
+      
+      if (storedTasks !== null) {
+        setTasks(JSON.parse(storedTasks));
+      }
+    } catch (error) {
+      console.log("Error loading tasks:", error);
+    }
+  }
+
+  /**
    * Adds a new task to the task list.
    * Prevents empty tasks from being added.
    */
   function addTask() {
-
     if (task.trim() === "") {
       Alert.alert("Missing Task", "Please enter a task before adding it.");
       return;
@@ -37,7 +83,7 @@ export default function TaskScreen() {
     // Add the task to the array
     setTasks([...tasks, task.trim()]);
 
-    // Clear the text box ready for the next task
+    // Clear the text box
     setTask("");
   }
 
@@ -46,7 +92,6 @@ export default function TaskScreen() {
    * the user to confirm the action.
    */
   function deleteTask(indexToDelete: number) {
-
     Alert.alert(
       "Delete Task",
       "Are you sure you want to delete this task?",
@@ -60,7 +105,6 @@ export default function TaskScreen() {
           style: "destructive",
 
           onPress: () => {
-
             // Create a new list without the selected task
             const updatedTasks = tasks.filter(
               (_, index) => index !== indexToDelete
@@ -75,9 +119,7 @@ export default function TaskScreen() {
   }
 
   return (
-
     <View style={styles.container}>
-
       {/* Screen heading */}
       <Text style={styles.title}>📝 My Tasks</Text>
 
@@ -87,9 +129,7 @@ export default function TaskScreen() {
       </Text>
 
       {/* Displays the current number of tasks */}
-      <Text style={styles.counter}>
-        Total Tasks: {totalTasks}
-      </Text>
+      <Text style={styles.counter}>Total Tasks: {totalTasks}</Text>
 
       {/* Text input for entering a new task */}
       <TextInput
@@ -100,63 +140,38 @@ export default function TaskScreen() {
       />
 
       {/* Button used to add a task */}
-      <Pressable
-        style={styles.button}
-        onPress={addTask}
-      >
-        <Text style={styles.buttonText}>
-          Add Task
-        </Text>
+      <Pressable style={styles.button} onPress={addTask}>
+        <Text style={styles.buttonText}>Add Task</Text>
       </Pressable>
 
       {/* Display a message when no tasks have been added */}
       {tasks.length === 0 ? (
-
         <Text style={styles.emptyMessage}>
           No tasks yet.
-
-{"\n\n"}
-
+          {"\n\n"}
           Add your first task above.
         </Text>
-
       ) : (
-
         // Display each task in the task list
         tasks.map((item, index) => (
-
-          <View
-            key={index}
-            style={styles.taskRow}
-          >
-
-            <Text style={styles.task}>
-              • {item}
-            </Text>
+          <View key={index} style={styles.taskRow}>
+            <Text style={styles.task}>• {item}</Text>
 
             {/* Delete button */}
             <Pressable
               style={styles.deleteButton}
               onPress={() => deleteTask(index)}
             >
-              <Text style={styles.deleteText}>
-                Delete
-              </Text>
+              <Text style={styles.deleteText}>Delete</Text>
             </Pressable>
-
           </View>
-
         ))
-
       )}
-
     </View>
-
   );
 }
 
 const styles = StyleSheet.create({
-
   // Main screen container
   container: {
     flex: 1,
@@ -260,5 +275,4 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "bold",
   },
-
 });
