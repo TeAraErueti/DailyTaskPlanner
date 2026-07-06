@@ -20,6 +20,7 @@ The purpose of creating this software was to learn the fundamentals of mobile ap
 - Task counter
 - User-friendly interface
 - Input validation to prevent empty tasks
+- **Tasks are saved using local storage (AsyncStorage)**
 
 ---
 
@@ -69,7 +70,6 @@ npx expo start
 Future improvements for this application could include:
 
 - Mark tasks as completed
-- Save tasks using local storage
 - Add task due dates
 - Task categories
 - Dark mode
