@@ -20,7 +20,7 @@ The purpose of creating this software was to learn the fundamentals of mobile ap
 - Task counter
 - User-friendly interface
 - Input validation to prevent empty tasks
-- **Tasks are saved using local storage (AsyncStorage)**
+- Tasks are saved using local storage (AsyncStorage)
 
 ---
 
