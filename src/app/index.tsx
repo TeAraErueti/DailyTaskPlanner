@@ -1,98 +1,116 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
+/**
+ * Home screen displayed when the application starts.
+ * This screen introduces the Daily Task Planner and
+ * allows the user to navigate to the Tasks screen.
+ */
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <View style={styles.container}>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+      {/* Application icon */}
+      <Text style={styles.emoji}>📋</Text>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+      {/* Main application title */}
+      <Text style={styles.title}>
+        Daily Task Planner
+      </Text>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      {/* Brief description of the application */}
+      <Text style={styles.subtitle}>
+        Stay organised by adding and managing your daily tasks.
+      </Text>
+
+      {/* Displays the application's key features */}
+      <View style={styles.featureBox}>
+
+        <Text style={styles.feature}>✅ Add new tasks</Text>
+
+        <Text style={styles.feature}>✅ Delete completed tasks</Text>
+
+        <Text style={styles.feature}>✅ Stay organised every day</Text>
+
+      </View>
+
+      {/* Navigates the user to the Tasks screen */}
+      <Pressable
+        style={styles.button}
+        onPress={() => router.push("/tasks")}
+      >
+        <Text style={styles.buttonText}>
+          View My Tasks
+        </Text>
+      </Pressable>
+
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+
+  // Main container for the Home screen
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F4F8FB",
+    padding: 25,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+
+  // Displays the clipboard emoji at the top of the screen
+  emoji: {
+    fontSize: 70,
+    marginBottom: 10,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
+
+  // Styles the main heading
   title: {
-    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: "center",
+    color: "#1E3A5F",
   },
-  code: {
-    textTransform: 'uppercase',
+
+  // Styles the introductory text
+  subtitle: {
+    fontSize: 18,
+    textAlign: "center",
+    color: "#555",
+    marginBottom: 35,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+
+  // Container for the list of application features
+  featureBox: {
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 35,
+    elevation: 3,
   },
+
+  // Styles each feature displayed to the user
+  feature: {
+    fontSize: 18,
+    marginBottom: 12,
+  },
+
+  // Styles the navigation button
+  button: {
+    backgroundColor: "#2E7D32",
+    paddingVertical: 16,
+    paddingHorizontal: 45,
+    borderRadius: 10,
+  },
+
+  // Styles the button text
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
 });

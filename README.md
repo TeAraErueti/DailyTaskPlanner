@@ -1,56 +1,105 @@
-# Welcome to your Expo app 👋
+# Daily Task Planner
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+The Daily Task Planner is a simple mobile application built using React Native and Expo. The application allows users to organise their daily activities by adding tasks to a list and removing them once they are no longer needed. The application has been designed with a clean and simple user interface to make task management easy and intuitive.
 
-1. Install dependencies
+The purpose of creating this software was to learn the fundamentals of mobile application development using React Native. Throughout this project I learned how to build multiple screens, navigate between screens, manage application state using React hooks, respond to user input, and create an interactive mobile application.
 
-   ```bash
-   npm install
-   ```
+**Software Demo Video:**  
+*(Add your YouTube link here after recording your demonstration.)*
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+# Features
 
-In the output, you'll find options to open the app in a
+- Home screen with application overview
+- Tasks screen
+- Add new tasks
+- Delete tasks with confirmation dialog
+- Task counter
+- User-friendly interface
+- Input validation to prevent empty tasks
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+# Development Environment
 
-## Get a fresh project
+## Tools Used
 
-When you're ready, run:
+- Visual Studio Code
+- Node.js
+- npm
+- Expo
+- Android Studio
+- Android Emulator
+- Git
+- GitHub
+
+## Programming Language
+
+- TypeScript
+- React Native
+- Expo Router
+
+---
+
+# How to Run the Project
+
+1. Clone or download the repository.
+
+2. Install dependencies.
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. Start the Expo development server.
 
-### Other setup steps
+```bash
+npx expo start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+4. Press **a** to launch the Android Emulator.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+# Future Improvements
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Future improvements for this application could include:
 
-## Join the community
+- Mark tasks as completed
+- Save tasks using local storage
+- Add task due dates
+- Task categories
+- Dark mode
+- Edit existing tasks
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Useful Websites
+
+- Expo Documentation  
+  https://docs.expo.dev/
+
+- React Native Documentation  
+  https://reactnative.dev/docs/getting-started
+
+- Expo Router Documentation  
+  https://docs.expo.dev/router/introduction/
+
+- Android Studio Documentation  
+  https://developer.android.com/studio
+
+- TypeScript Documentation  
+  https://www.typescriptlang.org/docs/
+
+---
+
+# Author
+
+Te Ara Erueti
+
+Bachelor of Applied Science (Software Development)
+
+Brigham Young University–Idaho
